@@ -35,7 +35,7 @@ app.use(express.json());
 
 // Routes
 app.use('/auth', authRoutes);
-app.use('/timer', timerRoutes);
+app.use('/start-timer', timerRoutes);
 
 // Start the server
 const PORT = process.env.PORT || 3000;
