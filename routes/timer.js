@@ -19,6 +19,7 @@ router.post('/start-timer', requireAuth, async (req, res) => {
 router.get('/get-timer', requireAuth, async (req, res) => {
   try {
     const userId = req.userId;
+    console.log(userId);
     const timer = await Timer.findOne({ userId });
 
     if (!timer) {
