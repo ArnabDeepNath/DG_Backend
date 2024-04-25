@@ -5,6 +5,7 @@ const timerSchema = new mongoose.Schema({
   startTime: Number,
   duration: Number,
   token: String,
+  userId: { type: String, required: true },
 });
 
 module.exports = mongoose.model('Timer', timerSchema);
