@@ -64,7 +64,7 @@ router.post('/login', async (req, res) => {
 
   // Generate JWT token
   const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
-
+  res.setHeader('Access-Control-Allow-Origin', 'https://dg-delta.vercel.app');
   res.status(200).json({ token });
 });
 

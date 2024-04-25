@@ -17,7 +17,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: 'https://dg-delta.vercel.app/login.html',
+    origin: 'https://dg-delta.vercel.app',
   }),
 );
 // COnnect to mongodb
