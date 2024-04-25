@@ -34,4 +34,36 @@ router.get('/get-timer', requireAuth, async (req, res) => {
   }
 });
 
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      // Redirect to login page if token is not present
+      window.location.href = '/login.html';
+      return;
+    }
+
+    const response = await fetch(
+      'https://dg-backend-9135cdee7c9e.herokuapp.com/start-timer/get-timer',
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+
+    if (response.ok) {
+      const timerData = await response.json();
+      displayTimer(timerData.startTime, timerData.duration);
+    } else {
+      console.error('Failed to fetch timer data');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+  }
+});
+
 module.exports = router;
