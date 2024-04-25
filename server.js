@@ -9,6 +9,8 @@ const timerRoutes = require('./routes/timer');
 // Setting up environment varibales
 dotenv.config();
 
+console.log('MONGODB_URI:', process.env.MONGODB_URI);
+
 //  creating instance of express
 const app = express();
 
