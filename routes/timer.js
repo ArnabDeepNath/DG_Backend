@@ -5,8 +5,6 @@ const { requireAuth } = require('../middleware/authMiddleware');
 const Timer = require('../models/Timer');
 
 router.post('/start-timer', requireAuth, async (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', '*'); // Allow all origins (not recommended for production)
-  console.log('Reached /start-timer route'); // Debug statement
   const { wish, duration } = req.body;
   const startTime = Date.now();
   const userId = req.userId;
