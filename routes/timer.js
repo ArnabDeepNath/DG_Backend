@@ -15,4 +15,23 @@ router.post('/start-timer', requireAuth, async (req, res) => {
   res.status(201).json({ message: 'Timer started successfully' });
 });
 
+router.get('/get-timer', requireAuth, async (req, res) => {
+  try {
+    const userId = req.userId;
+    const timer = await Timer.findOne({ userId });
+
+    if (!timer) {
+      return res.status(404).json({ message: 'Timer not found' });
+    }
+
+    res.status(200).json({
+      startTime: timer.startTime,
+      duration: timer.duration,
+    });
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 module.exports = router;
