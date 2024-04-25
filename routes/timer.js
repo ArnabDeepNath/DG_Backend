@@ -16,12 +16,17 @@ router.post('/start-timer', requireAuth, async (req, res) => {
   res.status(201).json({ message: 'Timer started successfully' });
 });
 
-router.get('/get-timer', requireAuth, async (req, res) => {
+router.get('/get-timer', async (req, res) => {
   try {
-    const userId = req.userId;
-    console.log(userId);
-    const timer = await Timer.findOne({ userId });
+    const token = req.headers.authorization;
+    if (!token) {
+      return res.status(401).json({ message: 'Unauthorized' });
+    }
 
+    const decoded = jwt.verify(token.split(' ')[1], process.env.JWT_SECRET);
+    const userId = decoded.userId;
+
+    const timer = await Timer.findOne({ userId });
     if (!timer) {
       return res.status(404).json({ message: 'Timer not found' });
     }
