@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/auth');
 const timerRoutes = require('./routes/timer');
+const cors = require('cors');
 
 // Setting up environment varibales
 dotenv.config();
@@ -14,6 +15,7 @@ console.log('MONGODB_URI:', process.env.MONGODB_URI);
 //  creating instance of express
 const app = express();
 
+app.use(cors());
 // COnnect to mongodb
 
 mongoose
