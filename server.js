@@ -15,7 +15,11 @@ console.log('MONGODB_URI:', process.env.MONGODB_URI);
 //  creating instance of express
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: 'https://dg-delta.vercel.app',
+  }),
+);
 // COnnect to mongodb
 
 mongoose
