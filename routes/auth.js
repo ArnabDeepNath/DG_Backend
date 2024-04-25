@@ -72,16 +72,17 @@ router.post('/login', async (req, res) => {
 
 // Inside your backend route for starting the timer
 router.post('/start-timer', async (req, res) => {
-  const { userId, duration } = req.body;
+  const { duration } = req.body;
 
-  // Save the start time and end time to the database
-  const startTime = new Date();
-  const endTime = new Date(startTime.getTime() + duration * 1000); // Convert seconds to milliseconds
+  // Extract the user ID from the token
+  const token = req.headers.authorization.split(' ')[1];
+  const decoded = jwt.verify(token, process.env.JWT_SECRET);
+  const userId = decoded.userId;
 
-  // Save the timer data to MongoDB
-  await Timer.create({ userId, startTime, endTime });
+  // Use the userId to perform actions specific to the user
 
-  res.status(200).json({ message: 'Timer started successfully' });
+  // Respond with success
+  res.status(200).json({ message: 'Timer started successfully.' });
 });
 
 module.exports = router;
