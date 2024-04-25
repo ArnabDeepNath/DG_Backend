@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const { requireAuth } = require('../middleware/authMiddleware');
 const Timer = require('../models/Timer');
+const jwt = require('jsonwebtoken');
 
 router.post('/start-timer', requireAuth, async (req, res) => {
   const { wish, duration } = req.body;
