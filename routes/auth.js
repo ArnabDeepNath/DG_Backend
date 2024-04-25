@@ -40,6 +40,8 @@ router.post('/register', async (req, res) => {
 
 // User Login
 
+// User Login
+
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
