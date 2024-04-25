@@ -71,31 +71,5 @@ router.post('/login', async (req, res) => {
 });
 
 // Inside your backend route for starting the timer
-router.post('/start-timer', async (req, res) => {
-  const { duration } = req.body;
-
-  // Extract the token from the authorization header
-  const authorizationHeader = req.headers.authorization;
-  if (!authorizationHeader || !authorizationHeader.startsWith('Bearer ')) {
-    return res.status(401).json({ message: 'Unauthorized' });
-  }
-  const token = authorizationHeader.split(' ')[1];
-
-  try {
-    // Verify the token and extract the user ID
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const userId = decoded.userId;
-
-    // Use the userId to perform actions specific to the user
-
-    // Respond with success
-    res.status(200).json({ message: 'Timer started successfully.' });
-  } catch (error) {
-    console.error('Error verifying token:', error);
-    res.status(401).json({ message: 'Unauthorized' });
-  }
-});
-
-module.exports = router;
 
 module.exports = router;
