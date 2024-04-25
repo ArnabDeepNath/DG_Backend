@@ -8,8 +8,9 @@ router.post('/start-timer', requireAuth, async (req, res) => {
   const { wish, duration } = req.body;
   const startTime = Date.now();
   const userId = req.userId;
+  const token = req.token;
 
-  const timer = new Timer({ wish, duration, startTime, userId });
+  const timer = new Timer({ wish, duration, startTime, userId, token });
   await timer.save();
 
   res.status(201).json({ message: 'Timer started successfully' });
